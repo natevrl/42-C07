@@ -6,13 +6,14 @@
 /*   By: nbenhado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 20:39:00 by nbenhado          #+#    #+#             */
-/*   Updated: 2021/07/12 11:47:17 by nbenhado         ###   ########.fr       */
+/*   Updated: 2021/07/12 12:59:58 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Se renseigner si il faut afficher le ./a.out ou non
 // reussir a free si size = 0
 // chercher dautres cas speciales
+// ily a une erreur lorsque le 2 eme argument et une seule lettre
 
 
 #include <stdlib.h>
@@ -32,10 +33,8 @@ int	ft_strlen(char	*str)
 
 char	*ft_strjoin(int	size, char	**strs, char	*sep)
 {
-	int		j;	
-	int		i;
-	int		stack;
-	char	*str_stack;
+	int		j, i, stack;	
+char	*str_stack;
 
 	i = 1;
 	stack = 0;
