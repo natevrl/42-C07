@@ -6,7 +6,7 @@
 /*   By: nbenhado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 18:50:22 by nbenhado          #+#    #+#             */
-/*   Updated: 2021/07/13 11:28:39 by nbenhado         ###   ########.fr       */
+/*   Updated: 2021/07/13 12:48:05 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int ft_lennumbers(int nb)
 {
-    int i = 0;
+    long int i = 0;
     if (nb < 0)
     {
         nb = -nb;
@@ -32,7 +32,7 @@ int ft_lennumbers(int nb)
 
 int	ft_strlen(char	*str)
 {
-	int	index;
+	long int	index;
 
 	index = 0;
 	while (str[index] != '\0')
@@ -45,7 +45,7 @@ int	ft_strlen(char	*str)
 
 int    get_i_base(char n, char *base)
 {
-    int    i;
+    long int    i;
 
     i = 0;
     while (i < ft_strlen(base))
@@ -56,24 +56,43 @@ int    get_i_base(char n, char *base)
     }
     return (-1);
 }
+int    is_in_base(char n, char *base)
+{
+    long int    i;
+
+    i = 0;
+    while (i < ft_strlen(base))
+    {
+        if (base[i] == n)
+            return (1);
+        i++;
+    }
+    return (0);
+}
 
 int    convert_in_decimal(char *str, char *base)
 {
-    int    i;
-    int    res;
-    int    neg;
+    long int    i;
+    long int    res;
+    long int    compteur_negatif;
 
     i = 0;
     res = 0;
-    neg = 1;
-    if (str[i] == '-')
-        i++;
-    while (str[i])
+    compteur_negatif = 1;
+	while ((str[i] >= 9 && str[i] <= 13) || (str[i] == ' '))
+		i++;
+    while ((str[i] == '-' || str[i] == '+'))
+	{
+		if (str[i] == '-')
+			compteur_negatif *= -1;
+		i++;
+    }
+    while (str[i] && is_in_base(str[i], base))
     {
         res = res * ft_strlen(base) + get_i_base(str[i], base);
         i++;
     }
-    return res;
+    return res * compteur_negatif;
 }
 
 
@@ -88,8 +107,8 @@ void	ft_swap(char *a, char *b)
 
 void	ft_rev_int_tab(char	*tab)
 {
-	int	a;
-    int max = ft_strlen(tab);
+	long int	a;
+    long int max = ft_strlen(tab);
 	a = 0;
 	while (max != a + 1 && max != a)
 	{
@@ -99,7 +118,7 @@ void	ft_rev_int_tab(char	*tab)
 	}
 }
 
-char    *convert_nbr_base(int nbr, char *base, char *tab_malloc, long int   j)
+char    *convert_nbr_base(long int nbr, char *base, char *tab_malloc, long int   j)
 {
     long int lenchain;
 
@@ -116,14 +135,14 @@ char    *convert_nbr_base(int nbr, char *base, char *tab_malloc, long int   j)
 char	*ft_convert_base(char	*nbr, char	*base_from, char	*base_to)
 {
     char *tab;
-    unsigned int testnb;
+    long int testnb;
     char *convert_nbr;
 
     testnb  = convert_in_decimal(nbr, base_from);
-    printf("%d\n", testnb);
-    if (nbr[0] == '-')
+    printf("%ld\n", testnb);
+    if (testnb < 0)
     {
-        
+        testnb = -testnb; 
         tab = malloc(ft_lennumbers(testnb)  * sizeof(char) + 1);
         convert_nbr = convert_nbr_base(testnb, base_to, tab, 1);
         tab[0] = '-';
@@ -142,7 +161,8 @@ char	*ft_convert_base(char	*nbr, char	*base_from, char	*base_to)
 int	main(void)
 {
     
-    printf("2a:%s\n", ft_convert_base("-420", "0123456789", "0123456789abcdef"));
+    printf("2a:%d\n", convert_in_decimal("  ---+2aK22", "0123456789abcdef"));
+    printf("2a:%s\n", ft_convert_base("-2147483648", "0123456789", "0123456789abcdef"));
     printf("42:%s\n", ft_convert_base("-vn", "poneyvif", "0123456789"));
     printf("42:%s\n", ft_convert_base("2a", "0123456789abcdef", "0123456789"));
 }

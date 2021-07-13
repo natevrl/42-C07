@@ -38,11 +38,70 @@ int check_base(char *str)
     return (1);
 }
 
+int    convert_in_decimal(char *str, char *base)
+{
+    long int    i;
+    long int    res;
+    long int    compteur_negatif;
+
+    i = 0;
+    res = 0;
+    neg = 1;
+	while ((str[i] >= 9 && str[i] <= 13) || (str[i] == ' '))
+		i++;
+    while ((str[i] == '-' || str[*i] == '+'))
+	{
+		if (str[i] == '-')
+			compteur_negatif *= -1;
+		i++;
+    while (str[i] )
+    {
+        res = res * ft_strlen(base) + get_i_base(str[i], base);
+        i++;
+    }
+    return res * compteur_negatif;
+}
 
 
+void	init_var(int	*i, int	*result,
+		int	*convert_negativ, int	*compteur_negatif)
+{
+	*i = 0;
+	*result = 0;
+	*convert_negativ = 1;
+	*compteur_negatif = 0;
+}
 
+void	boucle(char	*str, int	*i, int	*compteur_negatif)
+{
 
+	}
+}
 
+int	ft_atoi(char	*str)
+{
+	int	result;
+	int	i;
+	int	convert_negativ;
+	int	compteur_negatif;
+
+	init_var(&i, &result, &convert_negativ, &compteur_negatif);
+
+	boucle(str, &i, &compteur_negatif);
+	if (compteur_negatif % 2 == 1)
+		convert_negativ = -1;
+	while (str[i])
+	{
+		if ((str[i] >= '0' && str[i] <= '9'))
+			result = result * 10 + str[i] - '0';
+		else
+			break ;
+		i++;
+	}
+	if (result)
+		return (convert_negativ * result);
+	return (0);
+}
 
 
 int ft_lennumbers(int nb)
