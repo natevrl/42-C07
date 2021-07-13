@@ -6,7 +6,7 @@
 /*   By: nbenhado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 18:50:22 by nbenhado          #+#    #+#             */
-/*   Updated: 2021/07/13 15:42:07 by nbenhado         ###   ########.fr       */
+/*   Updated: 2021/07/13 23:24:30 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ char	*ft_convert_base(char	*nbr, char	*base_from, char	*base_to)
 	{
 		testnb = -testnb;
 		tab = malloc(100 * sizeof(char));
+		if (!tab)
+			return (NULL);
 		convert_nbr = convert_nbr_base(testnb, base_to, tab, 1);
 		tab[0] = '-';
 		ft_rev_int_tab(convert_nbr + 1);
@@ -104,6 +106,8 @@ char	*ft_convert_base(char	*nbr, char	*base_from, char	*base_to)
 	else
 	{
 		tab = malloc(100 * sizeof(char));
+		if (!tab)
+			return (NULL);
 		convert_nbr = convert_nbr_base(testnb, base_to, tab, 0);
 		ft_rev_int_tab(convert_nbr);
 	}
