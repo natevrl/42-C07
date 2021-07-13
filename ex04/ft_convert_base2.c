@@ -1,163 +1,105 @@
-void	ft_swap3(int *a, int *b)
-{
-	int	c;
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_convert_base2.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nbenhado <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/13 14:39:00 by nbenhado          #+#    #+#             */
+/*   Updated: 2021/07/13 15:42:13 by nbenhado         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-	c = *b;
-	*b = *a;
-	*a = c;
-}
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-void	ft_rev_int_tab(char	*tab)
+void		ft_swap(char *a, char *b);
+void		ft_rev_int_tab(char	*tab);
+long int	convert_in_decimal(char *str, char *base);
+char		*convert_nbr_base(long int	nbr, char	*base,
+				char	*tab_malloc, long int	j);
+char		*ft_convert_base(char	*nbr, char	*base_from, char	*base_to);
+
+long int	ft_lennumbers(long int nb)
 {
-	int	a;
-    int max = ft_strlen(tab);
-	a = 0;
-	while (size != a + 1 && size != a)
+	long int	i;
+
+	i = 0;
+	if (nb < 0)
 	{
-		ft_swap3(&tab[a], &tab[size - 1]);
-		size--;
-		a++;
+		nb = -nb;
 	}
-}
-
-
-
-
-int check_base(char *str)
-{
-    int i;
-
-    i = 0;
-    while (str[i])
-    {
-        if (str[i] == '-' || str[i] == '+' || str[i] == ' ' 
-                || (str[i] >= 9 && str[i] <= 13))
-            return (0);    
-        i++;
-    }
-    return (1);
-}
-
-int    convert_in_decimal(char *str, char *base)
-{
-    long int    i;
-    long int    res;
-    long int    compteur_negatif;
-
-    i = 0;
-    res = 0;
-    neg = 1;
-	while ((str[i] >= 9 && str[i] <= 13) || (str[i] == ' '))
-		i++;
-    while ((str[i] == '-' || str[*i] == '+'))
+	while (nb > 0)
 	{
-		if (str[i] == '-')
-			compteur_negatif *= -1;
+		nb /= 10;
 		i++;
-    while (str[i] )
-    {
-        res = res * ft_strlen(base) + get_i_base(str[i], base);
-        i++;
-    }
-    return res * compteur_negatif;
-}
-
-
-void	init_var(int	*i, int	*result,
-		int	*convert_negativ, int	*compteur_negatif)
-{
-	*i = 0;
-	*result = 0;
-	*convert_negativ = 1;
-	*compteur_negatif = 0;
-}
-
-void	boucle(char	*str, int	*i, int	*compteur_negatif)
-{
-
 	}
+	return (i);
 }
 
-int	ft_atoi(char	*str)
+long int	ft_strlen(char	*str)
 {
-	int	result;
+	long int	index;
+
+	index = 0;
+	while (str[index] != '\0')
+	{
+		index++;
+	}
+	return (index);
+}
+
+int	check_base(char	*base)
+{
 	int	i;
-	int	convert_negativ;
-	int	compteur_negatif;
+	int	j;
 
-	init_var(&i, &result, &convert_negativ, &compteur_negatif);
-
-	boucle(str, &i, &compteur_negatif);
-	if (compteur_negatif % 2 == 1)
-		convert_negativ = -1;
-	while (str[i])
+	i = 0;
+	j = 0;
+	if (base[0] == '\0' || ft_strlen(base) == 1)
+		return (0);
+	while (base[i])
 	{
-		if ((str[i] >= '0' && str[i] <= '9'))
-			result = result * 10 + str[i] - '0';
-		else
-			break ;
+		if (base[i] == '+' || base[i] == '-'
+			|| (base[i] >= 9 && base[i] <= 13) || base[i] == 32)
+			return (0);
+		j = i + 1;
+		while (base[j])
+		{
+			if (base[i] == base[j])
+				return (0);
+			j++;
+		}
 		i++;
 	}
-	if (result)
-		return (convert_negativ * result);
+	return (1);
+}
+
+int	is_in_base(char	n, char	*base)
+{
+	long int	i;
+
+	i = 0;
+	while (i < ft_strlen(base))
+	{
+		if (base[i] == n)
+			return (1);
+		i++;
+	}
 	return (0);
 }
 
-
-int ft_lennumbers(int nb)
-{   
-    int i = 0;
-    if (nb < 0)
-    {
-        nb = -nb;
-    }
-    while (nb > 0)
-    {
-        nb /= 10;
-        i++;
-    }
-    return (i);
-}
-
-
-int	get_index_of_number_base(char	n, char	*base)
+int	get_i_base(char	n, char	*base)
 {
-    int i = 0;
-    while (base[i])
-    {
-        if (n == base[i])
-            return (i);
-        i++;
-    }
-    return (-1);
-}
+	long int	i;
 
-
-int convert_in_decimal(char *nbr, char *base)
-{
-    int result;
-    int i = 0;
-    int len_base = ft_strlen(base);
-    int convert_negativ = 1;
-
-    if (nbr[0] == '-')
-    {
-        convert_negativ = -1;
-        i++;
-    }
-    while (nbr[i])
-    {
-        result = result * len_base + get_index_of_number_base(nbr[i], base);
-        i++;
-
-    }
-    return (convert_negativ * result);
-}
-
-
-#include <stdio.h>
-
-int main()
-{
-    printf("%d", ft_lennumbers(-1234567890));
+	i = 0;
+	while (i < ft_strlen(base))
+	{
+		if (base[i] == n)
+			return (i);
+		i++;
+	}
+	return (-1);
 }
