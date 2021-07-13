@@ -6,7 +6,7 @@
 /*   By: nbenhado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 18:50:22 by nbenhado          #+#    #+#             */
-/*   Updated: 2021/07/12 23:50:05 by nbenhado         ###   ########.fr       */
+/*   Updated: 2021/07/13 11:28:39 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,6 @@ int ft_lennumbers(int nb)
         i++;
     }
     return (i);
-}
-
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
 }
 
 
@@ -83,7 +77,7 @@ int    convert_in_decimal(char *str, char *base)
 }
 
 
-void	ft_swap3(char *a, char *b)
+void	ft_swap(char *a, char *b)
 {
 	char	c;
 
@@ -99,7 +93,7 @@ void	ft_rev_int_tab(char	*tab)
 	a = 0;
 	while (max != a + 1 && max != a)
 	{
-		ft_swap3(&tab[a], &tab[max - 1]);
+		ft_swap(&tab[a], &tab[max - 1]);
 		max--;
 		a++;
 	}
@@ -123,23 +117,25 @@ char	*ft_convert_base(char	*nbr, char	*base_from, char	*base_to)
 {
     char *tab;
     unsigned int testnb;
-    char *lol;
+    char *convert_nbr;
+
     testnb  = convert_in_decimal(nbr, base_from);
     printf("%d\n", testnb);
     if (nbr[0] == '-')
     {
+        
         tab = malloc(ft_lennumbers(testnb)  * sizeof(char) + 1);
-        lol = convert_nbr_base(testnb, base_to, tab, 1);
-        ft_rev_int_tab(lol);
+        convert_nbr = convert_nbr_base(testnb, base_to, tab, 1);
         tab[0] = '-';
+        ft_rev_int_tab(convert_nbr + 1);
     }
     else
     {
         tab = malloc(ft_lennumbers(testnb) * sizeof(char));
-        lol = convert_nbr_base(testnb, base_to, tab, 0);
-        ft_rev_int_tab(lol);
+        convert_nbr = convert_nbr_base(testnb, base_to, tab, 0);
+        ft_rev_int_tab(convert_nbr);
     }
-    return (lol);
+    return (convert_nbr);
 }
 
 

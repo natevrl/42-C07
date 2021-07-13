@@ -23,7 +23,20 @@ void	ft_rev_int_tab(char	*tab)
 
 
 
+int check_base(char *str)
+{
+    int i;
 
+    i = 0;
+    while (str[i])
+    {
+        if (str[i] == '-' || str[i] == '+' || str[i] == ' ' 
+                || (str[i] >= 9 && str[i] <= 13))
+            return (0);    
+        i++;
+    }
+    return (1);
+}
 
 
 
