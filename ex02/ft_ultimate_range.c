@@ -6,26 +6,25 @@
 /*   By: nbenhado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 20:38:27 by nbenhado          #+#    #+#             */
-/*   Updated: 2021/07/10 09:29:09 by nbenhado         ###   ########.fr       */
+/*   Updated: 2021/07/14 17:51:04 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
 
 int	ft_ultimate_range(int	**range, int	min, int	max)
 {
+	int	i;
+
 	if (min >= max)
 	{
 		*range = NULL;
 		return (0);
 	}
-
-	*range  = malloc((max - min) * sizeof(int));
+	*range = malloc((max - min) * sizeof(int));
 	if (!*range)
 		return (-1);
-	int	i;
-
 	i = 0;
-	while(i < max - min)
+	while (i < max - min)
 	{
 		*range[i] = min + i;
 		i++;

@@ -6,18 +6,11 @@
 /*   By: nbenhado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 20:39:00 by nbenhado          #+#    #+#             */
-/*   Updated: 2021/07/12 12:59:58 by nbenhado         ###   ########.fr       */
+/*   Updated: 2021/07/15 01:06:36 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Se renseigner si il faut afficher le ./a.out ou non
-// reussir a free si size = 0
-// chercher dautres cas speciales
-// ily a une erreur lorsque le 2 eme argument et une seule lettre
-
-
 #include <stdlib.h>
-#include <stdio.h>
 
 int	ft_strlen(char	*str)
 {
@@ -31,47 +24,48 @@ int	ft_strlen(char	*str)
 	return (index);
 }
 
+void	init_var(int	*i, int	*stack)
+{
+	*i = 0;
+	*stack = 0;
+}
+
+void	init_var2(int	*i, int	*stack)
+{
+	*i = -1;
+	*stack = -1;
+}
+
 char	*ft_strjoin(int	size, char	**strs, char	*sep)
 {
-	int		j, i, stack;	
-char	*str_stack;
-
-	i = 1;
-	stack = 0;
-
+	int		j;	
+	int		i;
+	int		stack;
+	char	*str_stack;
+	
+	init_var(&i, &stack);
 	if (size == 0)
-		return "";
-
-	while (i != size)
-	{
+		return ("");
+	while (++i != size)
 		stack += ft_strlen(strs[i]);
-		i++;
-	}
 	str_stack = malloc(stack + 1 * sizeof(char));
-	i = 0;
-	stack = 0;
-	while (i < size)
+	if (!str_stack)
+		return (NULL);
+	init_var2(&i, &stack);
+	while (++i < size)
 	{
-		j = 0;
-		while (strs[i][j])
-		{
-			str_stack[stack] = strs[i][j];
-			j++;
-			stack++;
-		}
-		j = 0;
-		while (sep[j])
-		{
+		j = -1;
+		while (strs[i][++j])
+			str_stack[stack++] = strs[i][j];
+		j = -1;
+		while (sep[++j])
 			if (i != size - 1)
-				str_stack[stack] = sep[j];
-			stack++;
-			j++;
-		}
-		i++;
+				str_stack[stack++] = sep[j];
 	}
 	return (str_stack);
 }
 
+#include <stdio.h>
 
 char *ft_strjoin(int size, char **strs, char *sep);
 
