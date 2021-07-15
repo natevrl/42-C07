@@ -6,7 +6,7 @@
 /*   By: nbenhado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 20:39:00 by nbenhado          #+#    #+#             */
-/*   Updated: 2021/07/15 14:38:07 by nbenhado         ###   ########.fr       */
+/*   Updated: 2021/07/15 17:23:09 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ft_strjoin(int	size, char	**strs, char	*sep)
 	int		i;
 	int		stack;
 	char	*str_stack;
-	
+
 	init_var(&i, &stack);
 	if (size == 0)
 		return ("");
@@ -60,9 +60,9 @@ char	*ft_strjoin(int	size, char	**strs, char	*sep)
 		j = -1;
 		if (strs[i] != '\0')
 		{
-		while (sep[++j])
-			if (i != size - 1)
-				str_stack[stack++] = sep[j];
+			while (sep[++j])
+				if (i != size - 1)
+					str_stack[stack++] = sep[j];
 		}
 	}
 	return (str_stack);
@@ -75,5 +75,5 @@ char *ft_strjoin(int size, char **strs, char *sep);
 int	main(int argc, char **argv)
 {
 	printf("./ex03/output___said___this___is___a___success :\n");
-	printf("%s\n",  ft_strjoin(argc, argv, NULL));
+	printf("%s\n",  ft_strjoin(argc, argv, "__"));
 }
