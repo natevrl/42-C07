@@ -6,7 +6,7 @@
 /*   By: nbenhado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 15:40:43 by nbenhado          #+#    #+#             */
-/*   Updated: 2021/07/14 12:11:04 by nbenhado         ###   ########.fr       */
+/*   Updated: 2021/07/15 13:19:17 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	ft_strlen(char	*str)
 	return (index);
 }
 
-int is_in_charset(char c, char *charset)
+int	is_in_charset(char c, char *charset)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (charset[i])
@@ -40,13 +40,14 @@ int is_in_charset(char c, char *charset)
 	return (0);
 }
 
-char *ft_split_copy(char *str, int fin, int debut)
+char	*ft_split_copy(char *str, int fin, int debut)
 {
-	int taille;
-	int	i = 0;
-	taille = fin - debut;
-	char *tab;
+	int		taille;
+	int		i;
+	char	*tab;
 
+	i = 0;
+	taille = fin - debut;
 	tab = malloc(taille * sizeof(char) + 1);
 	if (!tab)
 		return (NULL);
@@ -60,53 +61,55 @@ char *ft_split_copy(char *str, int fin, int debut)
 	return (tab);
 }
 
-char  **test(char *str, char *charset)
+void	init_var(int *i, int *f, int *charset_end)
 {
-	int i = 0;
-	int j;
-	int f = 0;
-	int before_charset;
-	int charset_end = 0;
-	char **tab_de_tab;
+	*i = 0;
+	*f = 0;
+	*charset_end = 0;
+}
 
-	tab_de_tab = malloc(1000 * sizeof(char *));
+char	**ft_split(char *str, char *charset)
+{
+	int		i;
+	int		j;
+	int		f;
+	int		charset_end;
+	char	**tab_de_tab;
+
+	init_var(&i, &f, &charset_end);
+	tab_de_tab = malloc(100 * sizeof(char *));
 	if (!tab_de_tab)
 		return (NULL);
-	while (str[i])
+	while (str[++i])
 	{
 		if (i == ft_strlen(str) - 1)
 			tab_de_tab[f] = ft_split_copy(str, i + 1, charset_end);
+		j = 0;
 		if (is_in_charset(str[i], charset))
 		{
-			j = 0;
-			while (is_in_charset(str[i], charset))
-			{
-				i++;
+			while (is_in_charset(str[++i], charset))
 				j++;
-			}
-			before_charset = i - j; // str avant de renconter un charset (fin a copier)
-			tab_de_tab[f] = ft_split_copy(str, before_charset, charset_end);
-			f++;
-			charset_end = i; // fin du charset (debut de la nouvelle str a copier)
-			i--;
+			tab_de_tab[f++] = ft_split_copy(str, (i - 1) - j, charset_end);
+			charset_end = i--;
 		}
-		i++;
 	}
-	tab_de_tab[f+1] = 0;
+	tab_de_tab[f + 1] = 0;
 	return (tab_de_tab);
 }
 
 int main()
 {
 	char **tab;
-
-	tab = test("  1 1    1 1         ", "1");
+	tab = ft_split("a12vadaw23awd2daw213awd112233awd22 ", "123");
 
 	printf("%s\n", tab[0]);
 	printf("%s\n", tab[1]);
 	printf("%s\n", tab[2]);
 	printf("%s\n", tab[3]);
 	printf("%s\n", tab[4]);
+	printf("%s\n", tab[5]);
+	printf("%s\n", tab[6]);
+	printf("%s\n", tab[7]);
 }
 /*
 #include <string.h>

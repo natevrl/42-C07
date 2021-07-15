@@ -6,7 +6,7 @@
 /*   By: nbenhado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 20:39:00 by nbenhado          #+#    #+#             */
-/*   Updated: 2021/07/15 01:06:36 by nbenhado         ###   ########.fr       */
+/*   Updated: 2021/07/15 13:33:35 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,12 @@ char	*ft_strjoin(int	size, char	**strs, char	*sep)
 		while (strs[i][++j])
 			str_stack[stack++] = strs[i][j];
 		j = -1;
+		if (strs[i] != '\0')
+		{
 		while (sep[++j])
 			if (i != size - 1)
 				str_stack[stack++] = sep[j];
+		}
 	}
 	return (str_stack);
 }
