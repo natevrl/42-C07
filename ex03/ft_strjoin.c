@@ -6,7 +6,7 @@
 /*   By: nbenhado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 20:39:00 by nbenhado          #+#    #+#             */
-/*   Updated: 2021/07/15 13:33:35 by nbenhado         ###   ########.fr       */
+/*   Updated: 2021/07/15 14:38:07 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,5 @@ char *ft_strjoin(int size, char **strs, char *sep);
 int	main(int argc, char **argv)
 {
 	printf("./ex03/output___said___this___is___a___success :\n");
-	printf("%s\n",  ft_strjoin(argc, argv, "___"));
+	printf("%s\n",  ft_strjoin(argc, argv, NULL));
 }

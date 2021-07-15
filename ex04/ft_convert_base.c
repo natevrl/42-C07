@@ -6,7 +6,7 @@
 /*   By: nbenhado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 18:50:22 by nbenhado          #+#    #+#             */
-/*   Updated: 2021/07/13 23:24:30 by nbenhado         ###   ########.fr       */
+/*   Updated: 2021/07/15 15:05:05 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,31 +20,37 @@ long int	ft_strlen(char	*str);
 int			check_base(char	*base);
 int			is_in_base(char	n, char	*base);
 
-void	ft_swap(char	*a, char	*b)
+char    *ft_strdup(char *src)
 {
-	char	c;
+    int        i;
+    char    *dest;
 
-	c = *b;
-	*b = *a;
-	*a = c;
+    i = 0;
+    dest = malloc((ft_strlen(src) + 1) * sizeof(char));
+    if (!dest)
+        return (NULL);
+    while (src[i])
+    {
+        dest[i] = src[i];
+        i++;
+    }
+    dest[i] = '\0';
+    return (dest);
 }
 
-void	ft_rev_int_tab(char	*tab)
+char	*ft_strcat(char	*dest, char	c)
 {
-	long int	a;
-	long int	max;
+	int	max;
 
-	max = ft_strlen(tab);
-	a = 0;
-	while (max != a + 1 && max != a)
-	{
-		ft_swap(&tab[a], &tab[max - 1]);
-		max--;
-		a++;
-	}
+	max = 0;
+	while (dest[max] != '\0')
+		max++;
+	dest[max] = c;
+	dest[max + 1] = '\0';
+	return (dest);
 }
 
-long int	convert_in_decimal(char	*str, char	*base)
+long int	ft_atoi_base(char	*str, char	*base)
 {
 	long int	i;
 	long int	res;
@@ -69,54 +75,43 @@ long int	convert_in_decimal(char	*str, char	*base)
 	return (res * compteur_negatif);
 }
 
-char	*convert_nbr_base(long int	nbr, char	*base,
-		char	*tab_malloc, long int	j)
+void	ft_putnbr_base(long int	nbr, char	*base, char	*buffer)
 {
 	long int	lenchain;
 
 	lenchain = ft_strlen(base);
-	if (nbr > lenchain)
+	if (nbr < 0)
 	{
-		convert_nbr_base(nbr / lenchain, base, tab_malloc, j + 1);
+		buffer[0] = '-';
+		nbr = -nbr;
+	}	
+	
+	if (nbr > lenchain - 1)
+	{
+		ft_putnbr_base(nbr / lenchain, base, buffer);
 		nbr = nbr % lenchain;
 	}
-	tab_malloc[j] = base[nbr];
-	return (tab_malloc);
+	ft_strcat(buffer, base[nbr]);
 }
 
 char	*ft_convert_base(char	*nbr, char	*base_from, char	*base_to)
 {
-	char		*tab;
-	long int	testnb;
-	char		*convert_nbr;
+	long int	var_atoi;
+	char		buffer[128];
 
 	if (!(check_base(base_from)) || !(check_base(base_to)))
 		return (NULL);
-	testnb = convert_in_decimal(nbr, base_from);
-	if (testnb < 0)
-	{
-		testnb = -testnb;
-		tab = malloc(100 * sizeof(char));
-		if (!tab)
-			return (NULL);
-		convert_nbr = convert_nbr_base(testnb, base_to, tab, 1);
-		tab[0] = '-';
-		ft_rev_int_tab(convert_nbr + 1);
-	}
-	else
-	{
-		tab = malloc(100 * sizeof(char));
-		if (!tab)
-			return (NULL);
-		convert_nbr = convert_nbr_base(testnb, base_to, tab, 0);
-		ft_rev_int_tab(convert_nbr);
-	}
-	convert_nbr[ft_strlen(convert_nbr) + 1] = '\0';
-	return (convert_nbr);
+	var_atoi = ft_atoi_base(nbr, base_from);
+	printf("%ld\n", var_atoi);
+	buffer[0] = '\0';
+	buffer[1] = '\0';
+	buffer[2] = '\0';
+	ft_putnbr_base(var_atoi, base_to, buffer);
+	return (ft_strdup(buffer));
 }
 
 int	main(void)
 {
 printf("42:%s\n", ft_convert_base("qqqqwwweerr", "qwertyuio", "asdfghjkl"));
-            printf("-42:%s\n", ft_convert_base("+----00042", "0123456789", "0123456789abcdef"));
-            printf("2a:%s\n", ft_convert_base("42", "0123456789", "0123456789abcdef"));}
+            printf("-42:%s\n", ft_convert_base("+---00042", "0123456789", "0123456789abcdef"));
+            printf("2a:%s\n", ft_convert_base("-42", "0123456789", "01"));}

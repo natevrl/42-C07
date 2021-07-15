@@ -6,7 +6,7 @@
 /*   By: nbenhado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:39:00 by nbenhado          #+#    #+#             */
-/*   Updated: 2021/07/13 15:42:13 by nbenhado         ###   ########.fr       */
+/*   Updated: 2021/07/15 14:14:27 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 void		ft_swap(char *a, char *b);
 void		ft_rev_int_tab(char	*tab);
-long int	convert_in_decimal(char *str, char *base);
-char		*convert_nbr_base(long int	nbr, char	*base,
+long int	ft_atoi_base(char *str, char *base);
+char		*ft_putnbr_base(long int	nbr, char	*base,
 				char	*tab_malloc, long int	j);
 char		*ft_convert_base(char	*nbr, char	*base_from, char	*base_to);
 
