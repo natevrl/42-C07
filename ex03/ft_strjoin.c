@@ -6,7 +6,7 @@
 /*   By: nbenhado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 20:39:00 by nbenhado          #+#    #+#             */
-/*   Updated: 2021/07/15 23:42:53 by nbenhado         ###   ########.fr       */
+/*   Updated: 2021/07/17 13:49:00 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,4 @@ char	*ft_strjoin(int	size, char	**strs, char	*sep)
 					str_stack[stack++] = sep[j];
 	}
 	return (str_stack);
-}
-
-#include <stdio.h>
-
-char *ft_strjoin(int size, char **strs, char *sep);
-
-int	main(int argc, char **argv)
-{
-	printf("./ex03/output___said___this___is___a___success :\n");
-	printf("%s\n",  ft_strjoin(argc, argv, "__"));
 }

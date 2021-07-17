@@ -6,7 +6,7 @@
 /*   By: nbenhado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 18:50:22 by nbenhado          #+#    #+#             */
-/*   Updated: 2021/07/15 15:05:05 by nbenhado         ###   ########.fr       */
+/*   Updated: 2021/07/16 00:40:33 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,22 @@ long int	ft_strlen(char	*str);
 int			check_base(char	*base);
 int			is_in_base(char	n, char	*base);
 
-char    *ft_strdup(char *src)
+char	*ft_strdup(char *src)
 {
-    int        i;
-    char    *dest;
+	int		i;
+	char	*dest;
 
-    i = 0;
-    dest = malloc((ft_strlen(src) + 1) * sizeof(char));
-    if (!dest)
-        return (NULL);
-    while (src[i])
-    {
-        dest[i] = src[i];
-        i++;
-    }
-    dest[i] = '\0';
-    return (dest);
+	i = 0;
+	dest = malloc((ft_strlen(src) + 1) * sizeof(char));
+	if (!dest)
+		return (NULL);
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }
 
 char	*ft_strcat(char	*dest, char	c)
@@ -85,7 +85,6 @@ void	ft_putnbr_base(long int	nbr, char	*base, char	*buffer)
 		buffer[0] = '-';
 		nbr = -nbr;
 	}	
-	
 	if (nbr > lenchain - 1)
 	{
 		ft_putnbr_base(nbr / lenchain, base, buffer);
@@ -109,9 +108,3 @@ char	*ft_convert_base(char	*nbr, char	*base_from, char	*base_to)
 	ft_putnbr_base(var_atoi, base_to, buffer);
 	return (ft_strdup(buffer));
 }
-
-int	main(void)
-{
-printf("42:%s\n", ft_convert_base("qqqqwwweerr", "qwertyuio", "asdfghjkl"));
-            printf("-42:%s\n", ft_convert_base("+---00042", "0123456789", "0123456789abcdef"));
-            printf("2a:%s\n", ft_convert_base("-42", "0123456789", "01"));}
