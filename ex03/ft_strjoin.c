@@ -6,7 +6,7 @@
 /*   By: nbenhado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 20:39:00 by nbenhado          #+#    #+#             */
-/*   Updated: 2021/07/17 13:49:00 by nbenhado         ###   ########.fr       */
+/*   Updated: 2021/07/17 19:17:26 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,30 +36,31 @@ void	init_var2(int	*i, int	*stack)
 	*stack = 0;
 }
 
+// tab[0] = i, tab[1] = j, tab[2] = stack
 char	*ft_strjoin(int	size, char	**strs, char	*sep)
 {
-	int		j;	
-	int		i;
-	int		stack;
+	int		tab[3];
 	char	*str_stack;
 
-	init_var(&i, &stack);
+	init_var(&tab[0], &tab[2]);
 	if (size == 0)
 		return ("");
-	while (++i != size)
-		stack += ft_strlen(strs[i]);
-	str_stack = malloc(1000 * sizeof(char));
-	init_var2(&i, &stack);
-	while (++i < size)
+	while (++tab[0] != size)
+		tab[2] += ft_strlen(strs[tab[0]]);
+	str_stack = (char *)malloc(sizeof(char) * tab[2] + 1);
+	if (str_stack == NULL)
+		return (NULL);
+	init_var2(&tab[0], &tab[2]);
+	while (++tab[0] < size)
 	{
-		j = -1;
-		while (strs[i][++j])
-			str_stack[stack++] = strs[i][j];
-		j = -1;
-		if (strs[i] != '\0')
-			while (sep[++j])
-				if (i != size - 1)
-					str_stack[stack++] = sep[j];
+		tab[1] = -1;
+		while (strs[tab[0]][++tab[1]])
+			str_stack[tab[2]++] = strs[tab[0]][tab[1]];
+		tab[1] = -1;
+		if (strs[tab[0]] != '\0')
+			while (sep[++tab[1]])
+				if (tab[0] != size - 1)
+					str_stack[tab[2]++] = sep[tab[1]];
 	}
 	return (str_stack);
 }
