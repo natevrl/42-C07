@@ -6,13 +6,12 @@
 /*   By: nbenhado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:39:00 by nbenhado          #+#    #+#             */
-/*   Updated: 2021/07/16 00:13:51 by nbenhado         ###   ########.fr       */
+/*   Updated: 2021/07/17 13:54:59 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 long int	ft_atoi_base(char *str, char *base);
 char		*ft_putnbr_base(long int	nbr, char	*base,

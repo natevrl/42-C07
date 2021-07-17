@@ -6,7 +6,7 @@
 /*   By: nbenhado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 18:50:22 by nbenhado          #+#    #+#             */
-/*   Updated: 2021/07/16 00:40:33 by nbenhado         ###   ########.fr       */
+/*   Updated: 2021/07/17 13:58:09 by nbenhado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,8 @@ char	*ft_convert_base(char	*nbr, char	*base_from, char	*base_to)
 	if (!(check_base(base_from)) || !(check_base(base_to)))
 		return (NULL);
 	var_atoi = ft_atoi_base(nbr, base_from);
-	printf("%ld\n", var_atoi);
 	buffer[0] = '\0';
 	buffer[1] = '\0';
-	buffer[2] = '\0';
 	ft_putnbr_base(var_atoi, base_to, buffer);
 	return (ft_strdup(buffer));
 }
