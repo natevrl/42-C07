@@ -26,7 +26,7 @@ int	ft_strlen(char	*str)
 
 void	init_var(int	*i, int	*stack)
 {
-	*i = 0;
+	*i = -1;
 	*stack = 0;
 }
 
@@ -43,13 +43,15 @@ char	*ft_strjoin(int	size, char	**strs, char	*sep)
 	char	*str_stack;
 
 	init_var(&tab[0], &tab[2]);
-	if (size == 0)
-		return ("");
+	if (size <= 0)
+		return (str_stack = malloc(sizeof(char)));
 	while (++tab[0] != size)
-		tab[2] += ft_strlen(strs[tab[0]]);
-	str_stack = (char *)malloc(sizeof(char) * tab[2] + 1);
+		tab[2] += ft_strlen(strs[tab[0]]) + ft_strlen(sep);
+	tab[2] -= ft_strlen(sep);
+	str_stack = (char *)malloc((sizeof(char) * tab[2]) + 1);
 	if (str_stack == NULL)
 		return (NULL);
+	str_stack[tab[2]] = '\0';
 	init_var2(&tab[0], &tab[2]);
 	while (++tab[0] < size)
 	{
@@ -63,4 +65,12 @@ char	*ft_strjoin(int	size, char	**strs, char	*sep)
 					str_stack[tab[2]++] = sep[tab[1]];
 	}
 	return (str_stack);
+}
+#include <stdio.h>
+
+int main (int argc, char **argv)
+{
+	char *str[3] = {"123", "123", "123"};
+	printf("%s\n", ft_strjoin(argc, argv, "___________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"));
+	return (0);
 }
